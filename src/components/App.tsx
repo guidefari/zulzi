@@ -1,8 +1,7 @@
 import { useState } from "react";
-import "./App.css";
 import Search from "./Search";
-import { ForecastResponse, SelectOption, WeatherResponse } from "./types";
-import { WEATHER_API_URL } from "./api-endpoints";
+import { ForecastResponse, SelectOption, WeatherResponse } from "../util/types";
+import { WEATHER_API_URL } from "../util/api-endpoints";
 
 interface CurrentWeather extends WeatherResponse {
   city: string;
@@ -39,10 +38,10 @@ function App() {
   };
 
   return (
-    <>
+    <main className="container mx-auto">
       <h1 className="text-8xl">Weather Forecast</h1>
       <Search onSearchChange={handleOnSearchChange} />
-    </>
+    </main>
   );
 }
 

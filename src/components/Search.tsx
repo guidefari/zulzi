@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
-import { GEO_API_URL, geoApiOptions } from "./api-endpoints";
-import { City, SelectOption } from "./types";
+import { GEO_API_URL, geoApiOptions } from "../util/api-endpoints";
+import { City, SelectOption } from "../util/types";
 import { SingleValue } from "react-select";
 
 type Props = {
