@@ -13,7 +13,7 @@
 }
 
 .daily-details-grid-item {
-    @apply flex items-center h-8 space-x-3;
+    @apply flex items-center h-8 space-x-3 text-sm md:text-base;
 }
 .daily-details-grid-item label:first-child {
     @apply  text-slate-500;

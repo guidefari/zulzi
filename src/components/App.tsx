@@ -45,7 +45,7 @@ function App() {
   };
 
   return (
-    <main className="container py-5 mx-auto transition ease-in-out delay-150">
+    <main className="container p-5 mx-auto transition ease-in-out delay-150">
       <Search onSearchChange={handleOnSearchChange} />
       {loading && (
         <div className="w-8 mx-auto my-20 text-5xl text-blue-600 rounded-full aspect-square border-1 animate-spin">

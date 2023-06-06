@@ -7,7 +7,7 @@ import {
 } from "react-accessible-accordion";
 import { Forecast as ForecastType } from "../util/types";
 
-const WEEK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const WEEK_DAYS = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
 
 type Props = {
   data: ForecastType;
@@ -19,7 +19,7 @@ const Forecast = ({ data }: Props) => {
 
   return (
     <>
-      <label className="text-2xl font-bold">5 Day Forecast</label>
+      <label className="text-xl font-semibold">5 Day Forecast</label>
       <Accordion allowZeroExpanded>
         {data.list.slice(0, 5).map((item, idx) => (
           <AccordionItem key={idx}>
@@ -27,8 +27,12 @@ const Forecast = ({ data }: Props) => {
               <AccordionItemButton>
                 <div className="flex items-center h-10 px-5 py-1 m-1 rounded-md cursor-pointer bg-slate-300">
                   <img src={`icons/${item.weather[0].icon}.png`} className="w-10" alt="weather" />
-                  <label className="flex-1 ml-4 font-semibold cursor-pointer text-slate-900">{forecastDays[idx]}</label>
-                  <label className="flex-1 mr-4 text-right cursor-pointer">{item.weather[0].description}</label>
+                  <label className="flex-1 ml-4 text-sm font-semibold cursor-pointer md:text-base text-slate-900">
+                    {forecastDays[idx]}
+                  </label>
+                  <label className="flex-1 mr-4 text-xs text-right cursor-pointer md:text-base">
+                    {item.weather[0].description}
+                  </label>
                   <label className="cursor-pointer text-slate-500">
                     {Math.round(item.main.temp_max)}°C /{Math.round(item.main.temp_min)}°C
                   </label>
