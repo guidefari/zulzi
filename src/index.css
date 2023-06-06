@@ -11,3 +11,14 @@
 .parameter-value {
     @apply text-sm font-bold text-right;
 }
+
+.daily-details-grid-item {
+    @apply flex items-center h-8 space-x-3;
+}
+.daily-details-grid-item label:first-child {
+    @apply  text-slate-500;
+}
+
+.daily-details-grid-item label:last-child {
+    @apply  text-slate-900;
+}

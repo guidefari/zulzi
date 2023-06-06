@@ -2,17 +2,18 @@ import { useState } from "react";
 import Search from "./Search";
 import {
   CurrentWeather as CurrentWeatherType,
-  Forecast,
+  Forecast as ForecastType,
   ForecastResponse,
   SelectOption,
   WeatherResponse,
 } from "../util/types";
 import { WEATHER_API_URL } from "../util/api-endpoints";
 import CurrentWeather from "./CurrentWeather";
+import Forecast from "./Forecast";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherType | null>(null);
-  const [forecast, setForecast] = useState<Forecast | null>(null);
+  const [forecast, setForecast] = useState<ForecastType | null>(null);
 
   const handleOnSearchChange = (selectedCity: SelectOption) => {
     const [lat, lon] = selectedCity.value.split(" ");
@@ -41,6 +42,7 @@ function App() {
       <h1 className="text-8xl">Weather Forecast</h1>
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
+      {forecast && <Forecast data={forecast} />}
     </main>
   );
 }
