@@ -22,5 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-# I like to keep a markdown file with the acceptance criteria. closer to code
+# I like to keep a markdown file with the acceptance criteria. not wise to have it public though 😉
 AC.md
