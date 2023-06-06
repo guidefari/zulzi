@@ -25,7 +25,7 @@ const Forecast = ({ data }: Props) => {
           <AccordionItem key={idx}>
             <AccordionItemHeading>
               <AccordionItemButton>
-                <div className="flex items-center h-10 px-5 py-1 m-1 cursor-pointer bg-slate-300 rounded-2xl">
+                <div className="flex items-center h-10 px-5 py-1 m-1 rounded-md cursor-pointer bg-slate-300">
                   <img src={`icons/${item.weather[0].icon}.png`} className="w-10" alt="weather" />
                   <label className="flex-1 ml-4 font-semibold cursor-pointer text-slate-900">{forecastDays[idx]}</label>
                   <label className="flex-1 mr-4 text-right cursor-pointer">{item.weather[0].description}</label>
