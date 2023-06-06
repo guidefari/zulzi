@@ -45,6 +45,7 @@ const Search = ({ onSearchChange }: Props) => {
       value={search}
       onChange={handleOnChange}
       loadOptions={loadOptions}
+      className="max-w-lg mx-auto"
     />
   );
 };

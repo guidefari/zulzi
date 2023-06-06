@@ -6,17 +6,17 @@ type Props = {
 
 const CurrentWeather = ({ data }: Props) => {
   return (
-    <div className="flex items-center justify-between max-w-5xl px-5 pb-5 mx-auto mt-5 text-white rounded-md shadow-md bg-slate-600">
-      <div>
+    <div className="max-w-sm px-5 pb-5 mx-auto mt-5 text-white rounded-md shadow-md bg-slate-500">
+      <div className="flex items-center justify-between">
         <div>
           <p className="font-bold text-5x">{data.city}</p>
           <p className="text-sm">{data.weather[0].description}</p>
         </div>
         <img alt="weather" className="weather-icon" src={`icons/${data.weather[0].icon}.png`} />
       </div>
-      <div>
-        <p className="font-bold text-8xl">{Math.round(data.main.temp)}°C</p>
-        <div className="pl-5">
+      <div className="flex justify-between">
+        <p className="font-bold text-7xl">{Math.round(data.main.temp)}°C</p>
+        <div className="flex-grow pl-5">
           <div className="parameter-row">
             <span className="parameter-label">Feels like</span>
             <span className="parameter-value">{Math.round(data.main.feels_like)}°C</span>

@@ -19,8 +19,8 @@ const Forecast = ({ data }: Props) => {
 
   return (
     <>
-      <label className="text-2xl font-bold">Daily</label>
-      <Accordion allowZeroExpanded className="transition ease-in-out delay-150">
+      <label className="text-2xl font-bold">5 Day Forecast</label>
+      <Accordion allowZeroExpanded>
         {data.list.splice(0, 7).map((item, idx) => (
           <AccordionItem key={idx}>
             <AccordionItemHeading>

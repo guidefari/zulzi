@@ -38,8 +38,7 @@ function App() {
   };
 
   return (
-    <main className="container mx-auto">
-      <h1 className="text-8xl">Weather Forecast</h1>
+    <main className="container py-5 mx-auto">
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecast && <Forecast data={forecast} />}
