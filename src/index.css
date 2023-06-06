@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.parameter-row {
+    @apply flex justify-between;
+}
+.parameter-label {
+    @apply text-sm font-normal text-left;
+}
+.parameter-value {
+    @apply text-sm font-bold text-right;
+}

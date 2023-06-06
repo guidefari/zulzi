@@ -127,3 +127,11 @@ export enum MainEnum {
   Clear = "Clear",
   Clouds = "Clouds",
 }
+
+export interface CurrentWeather extends WeatherResponse {
+  city: string;
+}
+
+export type Forecast = Omit<ForecastResponse, "city"> & {
+  city: string;
+};

@@ -1,18 +1,17 @@
 import { useState } from "react";
 import Search from "./Search";
-import { ForecastResponse, SelectOption, WeatherResponse } from "../util/types";
+import {
+  CurrentWeather as CurrentWeatherType,
+  Forecast,
+  ForecastResponse,
+  SelectOption,
+  WeatherResponse,
+} from "../util/types";
 import { WEATHER_API_URL } from "../util/api-endpoints";
-
-interface CurrentWeather extends WeatherResponse {
-  city: string;
-}
-
-type Forecast = Omit<ForecastResponse, "city"> & {
-  city: string;
-};
+import CurrentWeather from "./CurrentWeather";
 
 function App() {
-  const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
+  const [currentWeather, setCurrentWeather] = useState<CurrentWeatherType | null>(null);
   const [forecast, setForecast] = useState<Forecast | null>(null);
 
   const handleOnSearchChange = (selectedCity: SelectOption) => {
@@ -41,6 +40,7 @@ function App() {
     <main className="container mx-auto">
       <h1 className="text-8xl">Weather Forecast</h1>
       <Search onSearchChange={handleOnSearchChange} />
+      {currentWeather && <CurrentWeather data={currentWeather} />}
     </main>
   );
 }
