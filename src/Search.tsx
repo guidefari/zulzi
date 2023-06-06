@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { GEO_API_URL, geoApiOptions } from "./api-endpoints";
-import { City } from "./types";
+import { City, SelectOption } from "./types";
 import { SingleValue } from "react-select";
 
-type SelectOption = {
-  value: string;
-  label: string;
+type Props = {
+  onSearchChange: (selectedCity: SelectOption) => void;
 };
 
-const Search = () => {
+const Search = ({ onSearchChange }: Props) => {
   const [search, setSearch] = useState<SelectOption>();
 
   const loadOptions = async (inputValue: string): Promise<{ options: SelectOption[] }> => {
     if (!inputValue || inputValue.length === 0) return { options: [] };
-
     try {
       const response = await fetch(
         `${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
@@ -37,6 +35,7 @@ const Search = () => {
   const handleOnChange = (selectedCity: SingleValue<SelectOption>) => {
     if (!selectedCity) return;
     setSearch(selectedCity);
+    onSearchChange(selectedCity);
   };
 
   return (

@@ -13,3 +13,8 @@ export interface City {
   type: string;
   wikiDataId: string;
 }
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}
