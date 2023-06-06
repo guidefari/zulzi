@@ -15,19 +15,24 @@ const Search = () => {
   const loadOptions = async (inputValue: string): Promise<{ options: SelectOption[] }> => {
     console.log("inputValue:", inputValue);
     if (!inputValue || inputValue.length === 0) return { options: [] };
-    // change this to async await, with try catch
-    return fetch(`${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`, geoApiOptions)
-      .then((response) => response.json())
-      .then((response) => {
+
+    try {
+      const response = await fetch(
+        `${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
+        geoApiOptions
+      );
+      const json = await response.json();
+      const options = json.data?.map((city: City) => {
         return {
-          options: response.data.map((city: City) => {
-            return {
-              value: `${city.latitude} ${city.longitude}`,
-              label: `${city.name}, ${city.countryCode}`,
-            };
-          }),
+          value: `${city.latitude} ${city.longitude}`,
+          label: `${city.name}, ${city.countryCode}`,
         };
       });
+      return { options };
+    } catch (error) {
+      console.error(error);
+      return { options: [] };
+    }
   };
 
   const handleOnChange = (searchData: SingleValue<SelectOption>) => {
