@@ -12,7 +12,7 @@ const CurrentWeather = ({ data }: Props) => {
           <p className="font-bold text-5x">{data.city}</p>
           <p className="text-sm">{data.weather[0].description}</p>
         </div>
-        <img alt="weather" className="weather-icon" src={`icons/${data.weather[0].icon}.png`} />
+        <img alt="weather" className="w-24 aspect-square" src={`icons/${data.weather[0].icon}.png`} />
       </div>
       <div className="flex justify-between">
         <p className="font-bold text-7xl">{Math.round(data.main.temp)}°C</p>
