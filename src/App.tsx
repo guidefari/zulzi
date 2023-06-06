@@ -1,12 +1,20 @@
 import { useState } from "react";
 import "./App.css";
 import Search from "./Search";
-import { SelectOption } from "./types";
+import { ForecastResponse, SelectOption, WeatherResponse } from "./types";
 import { WEATHER_API_URL } from "./api-endpoints";
 
+interface CurrentWeather extends WeatherResponse {
+  city: string;
+}
+
+type Forecast = Omit<ForecastResponse, "city"> & {
+  city: string;
+};
+
 function App() {
-  const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecast, setForecast] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
+  const [forecast, setForecast] = useState<Forecast | null>(null);
 
   const handleOnSearchChange = (selectedCity: SelectOption) => {
     const [lat, lon] = selectedCity.value.split(" ");
@@ -21,17 +29,15 @@ function App() {
 
     Promise.all([currentWeatherFetch, forecastFetch])
       .then(async (response) => {
-        console.log("response:", response);
-        const weatherResponse = await response[0].json();
-        const forcastResponse = await response[1].json();
+        const weatherResponse: WeatherResponse = await response[0].json();
+        const forcastResponse: ForecastResponse = await response[1].json();
 
-        setCurrentWeather({ city: selectedCity.label, ...weatherResponse });
-        setForecast({ city: selectedCity.label, ...forcastResponse });
+        setCurrentWeather({ ...weatherResponse, city: selectedCity.label });
+        setForecast({ ...forcastResponse, city: selectedCity.label });
       })
-      .catch(console.log);
+      .catch((e) => console.error(e));
   };
 
-  console.log("handleOnSearchChange:", handleOnSearchChange);
   return (
     <>
       <h1 className="text-8xl">Weather Forecast</h1>
