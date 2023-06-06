@@ -13,7 +13,6 @@ const Search = () => {
   const [search, setSearch] = useState<SelectOption>();
 
   const loadOptions = async (inputValue: string): Promise<{ options: SelectOption[] }> => {
-    console.log("inputValue:", inputValue);
     if (!inputValue || inputValue.length === 0) return { options: [] };
 
     try {
@@ -35,10 +34,9 @@ const Search = () => {
     }
   };
 
-  const handleOnChange = (searchData: SingleValue<SelectOption>) => {
-    if (!searchData) return;
-    console.log("searchData:", searchData);
-    setSearch(searchData);
+  const handleOnChange = (selectedCity: SingleValue<SelectOption>) => {
+    if (!selectedCity) return;
+    setSearch(selectedCity);
   };
 
   return (
