@@ -25,6 +25,8 @@ const Search = ({ onSearchChange }: Props) => {
           label: `${city.name}, ${city.countryCode}`,
         };
       });
+      if (!options) return { options: [] };
+
       return { options };
     } catch (error) {
       console.error(error);

@@ -39,7 +39,7 @@ const Forecast = ({ data }: Props) => {
               <div className="grid flex-1 grid-cols-2 gap-4 px-4 py-1">
                 <div className="daily-details-grid-item">
                   <label>Pressure:</label>
-                  <label>{item.main.pressure}</label>
+                  <label>{item.main.pressure} hPa</label>
                 </div>
                 <div className="daily-details-grid-item">
                   <label>Humidity:</label>
