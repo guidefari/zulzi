@@ -21,7 +21,7 @@ const Forecast = ({ data }: Props) => {
     <>
       <label className="text-2xl font-bold">5 Day Forecast</label>
       <Accordion allowZeroExpanded>
-        {data.list.splice(0, 7).map((item, idx) => (
+        {data.list.slice(0, 5).map((item, idx) => (
           <AccordionItem key={idx}>
             <AccordionItemHeading>
               <AccordionItemButton>
