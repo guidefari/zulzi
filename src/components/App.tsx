@@ -10,7 +10,7 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherType | null>(null);
   const [forecast, setForecast] = useState<ForecastType | null>(null);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>("ad");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleOnSearchChange = (selectedCity: SelectOption) => {
     const [lat, lon] = selectedCity.value.split(" ");
