@@ -1,13 +1,7 @@
 import { useState } from "react";
 import Search from "./Search";
-import {
-  CurrentWeather as CurrentWeatherType,
-  Forecast as ForecastType,
-  ForecastResponse,
-  SelectOption,
-  WeatherResponse,
-} from "../util/types";
-import { WEATHER_API_URL, fetchCurrentWeather, fetchForecast } from "../util/api-endpoints";
+import { CurrentWeather as CurrentWeatherType, Forecast as ForecastType, SelectOption } from "../util/types";
+import { fetchCurrentWeather, fetchForecast } from "../util/api-endpoints";
 import CurrentWeather from "./CurrentWeather";
 import Forecast from "./Forecast";
 import Toast from "./Toast";
