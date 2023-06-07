@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
-import { GEO_API_URL, geoApiOptions } from "../util/api-endpoints";
-import { City, SelectOption } from "../util/types";
+import { fetchCities } from "../util/api-endpoints";
+import { SelectOption } from "../util/types";
 import { SingleValue } from "react-select";
 
 type Props = {
@@ -10,29 +10,6 @@ type Props = {
 
 const Search = ({ onSearchChange }: Props) => {
   const [search, setSearch] = useState<SelectOption>();
-
-  const loadOptions = async (inputValue: string): Promise<{ options: SelectOption[] }> => {
-    if (!inputValue || inputValue.length === 0) return { options: [] };
-    try {
-      const response = await fetch(
-        `${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
-        geoApiOptions
-      );
-      const json = await response.json();
-      const options = json.data?.map((city: City) => {
-        return {
-          value: `${city.latitude} ${city.longitude}`,
-          label: `${city.name}, ${city.countryCode}`,
-        };
-      });
-      if (!options) return { options: [] };
-
-      return { options };
-    } catch (error) {
-      console.error(error);
-      return { options: [] };
-    }
-  };
 
   const handleOnChange = (selectedCity: SingleValue<SelectOption>) => {
     if (!selectedCity) return;
@@ -46,8 +23,9 @@ const Search = ({ onSearchChange }: Props) => {
       debounceTimeout={600}
       value={search}
       onChange={handleOnChange}
-      loadOptions={loadOptions}
+      loadOptions={fetchCities}
       className="max-w-lg mx-auto"
+      id="search-input"
     />
   );
 };
