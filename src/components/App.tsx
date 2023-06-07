@@ -7,36 +7,41 @@ import {
   SelectOption,
   WeatherResponse,
 } from "../util/types";
-import { WEATHER_API_URL } from "../util/api-endpoints";
+import { WEATHER_API_URL, fetchCurrentWeather, fetchForecast } from "../util/api-endpoints";
 import CurrentWeather from "./CurrentWeather";
 import Forecast from "./Forecast";
+import Toast from "./Toast";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherType | null>(null);
   const [forecast, setForecast] = useState<ForecastType | null>(null);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>("ad");
 
   const handleOnSearchChange = (selectedCity: SelectOption) => {
     const [lat, lon] = selectedCity.value.split(" ");
-    const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY || process.env.VITE_WEATHER_API_KEY;
-
-    const currentWeatherFetch = fetch(
-      `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
-    );
-    const forecastFetch = fetch(
-      `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
-    );
 
     setForecast(null);
     setCurrentWeather(null);
     setLoading(true);
-    Promise.all([currentWeatherFetch, forecastFetch])
-      .then(async (response) => {
-        const weatherResponse: WeatherResponse = await response[0].json();
-        const forcastResponse: ForecastResponse = await response[1].json();
+    setErrorMessage("");
 
-        setCurrentWeather({ ...weatherResponse, city: selectedCity.label });
-        setForecast({ ...forcastResponse, city: selectedCity.label });
+    Promise.all([fetchCurrentWeather(lat, lon), fetchForecast(lat, lon)])
+      .then(async (response) => {
+        const weatherResponse = response[0];
+        const forcastResponse = response[1];
+
+        if (typeof weatherResponse !== "string") {
+          setCurrentWeather({ ...weatherResponse, city: selectedCity.label });
+        } else {
+          setErrorMessage(weatherResponse);
+        }
+
+        if (typeof forcastResponse !== "string") {
+          setForecast({ ...forcastResponse, city: selectedCity.label });
+        } else {
+          setErrorMessage(forcastResponse);
+        }
       })
       .catch((e) => console.error(e))
       .finally(() => {
@@ -54,6 +59,7 @@ function App() {
       )}
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecast && <Forecast data={forecast} />}
+      {errorMessage && <Toast message={errorMessage} />}
     </main>
   );
 }
